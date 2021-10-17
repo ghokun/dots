@@ -1,0 +1,25 @@
+---
+- name: Enable nvautoinstall copr repo
+  community.general.copr:
+    name: t0xic0der/nvidia-auto-installer-for-fedora
+
+- name: Install nvautoinstall packages
+  dnf:
+    name: nvautoinstall
+    state: latest
+
+- name: Enable RPM Fusion repo
+  command: nvautoinstall --rpmadd
+
+- name: Install NVIDIA driver
+  command: nvautoinstall --driver
+
+- name: Installs only the x86 libraries for Xorg
+  command: nvautoinstall --x86lib
+
+- name: Enable the official NVIDIA repository for CUDA software
+  command: nvautoinstall --nvrepo
+
+- name: Install CUDA
+  command: nvautoinstall --plcuda
+

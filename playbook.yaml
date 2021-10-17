@@ -1,0 +1,26 @@
+---
+- hosts: fedora
+  become: yes
+  vars_files:
+    - config.yaml
+
+  tasks:
+    - import_tasks: fedora/dnf.yaml
+      when: dnf.enabled
+      tags: ["dnf"]
+
+    - import_tasks: fedora/dconf.yaml
+      when: dconf.enabled
+      tags: ["dconf"]
+
+    - import_tasks: fedora/nvidia.yaml
+      when: nvidia.enabled
+      tags: ["nvidia"]
+
+    - import_tasks: fedora/docker.yaml
+      when: docker.enabled
+      tags: ["docker"]
+
+    - name: Reboot
+      reboot:
+        pre_reboot_delay: 0

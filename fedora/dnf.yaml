@@ -1,0 +1,28 @@
+---
+- name: Add yum repositories
+  yum_repository:
+    name: "{{ item.name }}"
+    description: "{{ item.description }}"
+    baseurl: "{{ item.baseurl }}"
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: "{{ item.gpgkey }}"
+  loop: "{{ dnf.repositories }}"
+
+- name: Import GPG keys
+  ansible.builtin.rpm_key:
+    state: present
+    key: "{{ item }}"
+  loop: "{{ dnf.gpg }}"
+
+- name: Update dnf packages
+  dnf:
+    name: "*"
+    state: latest
+
+- name: Install dnf packages
+  dnf:
+    name: "{{ item.name }}"
+    enablerepo: "{{ item.repository | default('') }}"
+    state: latest
+  loop: "{{ dnf.packages }}"

@@ -1,0 +1,392 @@
+---
+- name: Set appearence
+  become_user: "{{ user.name }}"
+  block:
+    - name: Locale
+      dconf:
+        key: "/system/locale/region"
+        value: "'{{ user.locale }}'"
+
+    - name: Fonts
+      block:
+        - name: Create fonts directory
+          file:
+            path: "~/.fonts"
+            state: directory
+
+        - name: Copy SF Mono
+          ansible.builtin.unarchive:
+            src: "fedora/theme/SFMono.zip"
+            dest: "~/.fonts"
+
+        - name: Copy IBM Plex Sans
+          ansible.builtin.unarchive:
+            src: "fedora/theme/IBMPlexSans.zip"
+            dest: "~/.fonts"
+
+        - name: Update font cache
+          command: "fc-cache -fv"
+
+        - name: Set monospace font
+          dconf:
+            key: "/org/gnome/desktop/interface/monospace-font-name"
+            value: "'SF Mono 10'"
+
+        - name: Set display font
+          dconf:
+            key: "/org/gnome/desktop/interface/font-name"
+            value: "'IBM Plex Sans Medium 10'"
+
+        - name: Set document font
+          dconf:
+            key: "/org/gnome/desktop/interface/document-font-name"
+            value: "'IBM Plex Sans Medium 10'"
+
+        - name: Set font antialiasing
+          dconf:
+            key: "/org/gnome/desktop/interface/font-antialiasing"
+            value: "'rgba'"
+
+        - name: Set font hinting
+          dconf:
+            key: "/org/gnome/desktop/interface/font-hinting"
+            value: "'medium'"
+
+    - name: Wallpaper and screensaver
+      block:
+        - name: Create wallpaper directory
+          file:
+            path: "~/.local/share/backgrounds"
+            state: directory
+
+        - name: Copy wallpaper
+          ansible.builtin.copy:
+            src: "fedora/theme/wallpaper.jpg"
+            dest: "~/.local/share/backgrounds/wallpaper.jpg"
+            owner: "{{ user.name }}"
+            group: "{{ user.name }}"
+            mode: "0644"
+
+        - name: Set wallpaper
+          dconf:
+            key: "/org/gnome/desktop/background/picture-uri"
+            value: "'file:///home/{{ user.name }}/.local/share/backgrounds/wallpaper.jpg'"
+
+        - name: Set screensaver
+          dconf:
+            key: "/org/gnome/desktop/screensaver/picture-uri"
+            value: "'file:///home/{{ user.name }}/.local/share/backgrounds/wallpaper.jpg'"
+
+        - name: Set wallpaper picture options
+          dconf:
+            key: "/org/gnome/desktop/background/picture-options"
+            value: "'zoom'"
+
+        - name: Set screensaver picture options
+          dconf:
+            key: "/org/gnome/desktop/screensaver/picture-options"
+            value: "'zoom'"
+
+        - name: Set wallpaper color shading type
+          dconf:
+            key: "/org/gnome/desktop/background/color-shading-type"
+            value: "'solid'"
+
+        - name: Set screensaver color shading type
+          dconf:
+            key: "/org/gnome/desktop/screensaver/color-shading-type"
+            value: "'solid'"
+
+        - name: Set wallpaper primary color
+          dconf:
+            key: "/org/gnome/desktop/background/primary-color"
+            value: "'#000000000000'"
+
+        - name: Set screensaver primary color
+          dconf:
+            key: "/org/gnome/desktop/screensaver/primary-color"
+            value: "'#000000000000'"
+
+        - name: Set wallpaper secondary color
+          dconf:
+            key: "/org/gnome/desktop/background/secondary-color"
+            value: "'#000000000000'"
+
+        - name: Set screensaver secondary color
+          dconf:
+            key: "/org/gnome/desktop/screensaver/secondary-color"
+            value: "'#000000000000'"
+
+        - name: Set screensaver lock delay
+          dconf:
+            key: "/org/gnome/desktop/screensaver/lock-delay"
+            value: "uint32 0"
+
+    - name: Icon theme
+      dconf:
+        key: "/org/gnome/desktop/interface/icon-theme"
+        value: "'Papirus-Dark'"
+
+    - name: GTK theme
+      block:
+        - name: Create themes directory
+          file:
+            path: "~/.local/share/themes"
+            state: directory
+
+        - name: Download GTK theme
+          ansible.builtin.unarchive:
+            src: "fedora/theme/Mojave-dark-solid.tar.xz"
+            dest: "~/.local/share/themes"
+            creates: "~/.local/share/themes/Mojave-dark-solid"
+
+        - name: Set GTK theme
+          dconf:
+            key: "/org/gnome/desktop/interface/gtk-theme"
+            value: "'Mojave-dark-solid'"
+
+    - name: Shell theme
+      block:
+        - name: Enable user-shell theme extension
+          dconf:
+            key: "/org/gnome/shell/enabled-extensions"
+            value: "['user-theme@gnome-shell-extensions.gcampax.github.com']"
+
+        - name: Set shell theme
+          dconf:
+            key: "/org/gnome/shell/extensions/user-theme/name"
+            value: "'Mojave-dark-solid'"
+
+    - name: Cursor theme
+      block:
+        - name: Create icons directory
+          file:
+            path: "~/.local/share/icons"
+            state: directory
+
+        - name: Download cursor theme
+          ansible.builtin.unarchive:
+            src: "fedora/theme/El_Capitan.zip"
+            dest: "~/.local/share/icons"
+            creates: "~/.local/share/icons/El_Capitan"
+
+        - name: Set cursor theme
+          dconf:
+            key: "/org/gnome/desktop/interface/cursor-theme"
+            value: "'El_Capitan'"
+
+    - name: Set window manager settings
+      block:
+        - name: Window manager button layout
+          dconf:
+            key: "/org/gnome/desktop/wm/preferences/button-layout"
+            value: "'close,minimize,maximize:appmenu'"
+
+        - name: Window manager mouse button modifier
+          dconf:
+            key: "/org/gnome/desktop/wm/preferences/mouse-button-modifier"
+            value: "'<Alt>'"
+
+        - name: Window manager button layout
+          dconf:
+            key: "/org/gnome/desktop/wm/preferences/titlebar-font"
+            value: "'IBM Plex Sans Semi-Bold 10'"
+
+    - name: Nautilus settings
+      block:
+        - name: Nautilus default view
+          dconf:
+            key: "/org/gnome/nautilus/preferences/default-folder-viewer"
+            value: "'icon-view'"
+
+        - name: Nautilus search view
+          dconf:
+            key: "/org/gnome/nautilus/preferences/search-view"
+            value: "'list-view'"
+
+        - name: Nautilus icon view
+          dconf:
+            key: "/org/gnome/nautilus/icon-view/default-zoom-level"
+            value: "'small'"
+
+    - name: Guake settings
+      block:
+        - name: Guake general compat-delete
+          dconf:
+            key: "/apps/guake/general/compat-delete"
+            value: "'delete-sequence'"
+
+        - name: Guake general display-n
+          dconf:
+            key: "/apps/guake/general/display-n"
+            value: "-1"
+
+        - name: Guake general display-tab-names
+          dconf:
+            key: "/apps/guake/general/display-tab-names"
+            value: "0"
+
+        - name: Guake general fullscreen-hide-tabbar
+          dconf:
+            key: "/apps/guake/general/fullscreen-hide-tabbar"
+            value: "false"
+
+        - name: Guake general gtk-prefer-dark-theme
+          dconf:
+            key: "/apps/guake/general/gtk-prefer-dark-theme"
+            value: "true"
+
+        - name: Guake general history-size
+          dconf:
+            key: "/apps/guake/general/history-size"
+            value: "10000"
+
+        - name: Guake general max-tab-name-length
+          dconf:
+            key: "/apps/guake/general/max-tab-name-length"
+            value: "100"
+
+        - name: Guake general mouse-display
+          dconf:
+            key: "/apps/guake/general/mouse-display"
+            value: "true"
+
+        - name: Guake general new-tab-after
+          dconf:
+            key: "/apps/guake/general/new-tab-after"
+            value: "true"
+
+        - name: Guake general open-tab-cwd
+          dconf:
+            key: "/apps/guake/general/open-tab-cwd"
+            value: "true"
+
+        - name: Guake general prompt-on-quit
+          dconf:
+            key: "/apps/guake/general/prompt-on-quit"
+            value: "true"
+
+        - name: Guake general quick-open-command-line
+          dconf:
+            key: "/apps/guake/general/quick-open-command-line"
+            value: "'gedit %(file_path)s'"
+
+        - name: Guake general restore-tabs-notify
+          dconf:
+            key: "/apps/guake/general/restore-tabs-notify"
+            value: "true"
+
+        - name: Guake general restore-tabs-startup
+          dconf:
+            key: "/apps/guake/general/restore-tabs-startup"
+            value: "true"
+
+        - name: Guake general save-tabs-when-changed
+          dconf:
+            key: "/apps/guake/general/save-tabs-when-changed"
+            value: "true"
+
+        - name: Guake general scroll-keystroke
+          dconf:
+            key: "/apps/guake/general/scroll-keystroke"
+            value: "true"
+
+        - name: Guake general set-window-title
+          dconf:
+            key: "/apps/guake/general/set-window-title"
+            value: "false"
+
+        - name: Guake general start-at-login
+          dconf:
+            key: "/apps/guake/general/start-at-login"
+            value: "true"
+
+        - name: Guake general tab-close-buttons
+          dconf:
+            key: "/apps/guake/general/tab-close-buttons"
+            value: "true"
+
+        - name: Guake general tab-ontop
+          dconf:
+            key: "/apps/guake/general/tab-ontop"
+            value: "false"
+
+        - name: Guake general use-default-font
+          dconf:
+            key: "/apps/guake/general/use-default-font"
+            value: "true"
+
+        - name: Guake general use-popup
+          dconf:
+            key: "/apps/guake/general/use-popup"
+            value: "true"
+
+        - name: Guake general use-scrollbar
+          dconf:
+            key: "/apps/guake/general/use-scrollbar"
+            value: "false"
+
+        - name: Guake general use-trayicon
+          dconf:
+            key: "/apps/guake/general/use-trayicon"
+            value: "false"
+
+        - name: Guake general window-halignment
+          dconf:
+            key: "/apps/guake/general/window-halignment"
+            value: "0"
+
+        - name: Guake general window-height
+          dconf:
+            key: "/apps/guake/general/window-height"
+            value: "52"
+
+        - name: Guake general window-losefocus
+          dconf:
+            key: "/apps/guake/general/window-losefocus"
+            value: "false"
+
+        - name: Guake general window-refocus
+          dconf:
+            key: "/apps/guake/general/window-refocus"
+            value: "false"
+
+        - name: Guake general window-tabbar
+          dconf:
+            key: "/apps/guake/general/window-tabbar"
+            value: "true"
+
+        - name: Guake general window-width
+          dconf:
+            key: "/apps/guake/general/window-width"
+            value: "100"
+
+        - name: Guake keybinding
+          dconf:
+            key: "/apps/guake/keybindings/global/show-hide"
+            value: "'<Primary>quotedbl'"
+
+        - name: Guake cursor shape
+          dconf:
+            key: "/apps/guake/style/cursor-shape"
+            value: "2"
+
+        - name: Guake background
+          dconf:
+            key: "/apps/guake/style/background/transparency"
+            value: "64"
+
+        - name: Guake bold font
+          dconf:
+            key: "/apps/guake/style/font/allow-bold"
+            value: "true"
+
+        - name: Guake palette
+          dconf:
+            key: "/apps/guake/style/font/palette"
+            value: "'#878787878787:#FFFF66660000:#CCCCFFFF0404:#FFFFCCCC0000:#4444B3B3CCCC:#99993333CCCC:#4444B3B3CCCC:#F5F5F5F5F5F5:#555555555555:#FFFF00000000:#0000FFFF0000:#FFFFFFFF0000:#00000000FFFF:#FFFF0000FFFF:#0000FFFFFFFF:#E5E5E5E5E5E5:#FFFFFFFFFFFF:#000000000000'"
+
+        - name: Guake palette name
+          dconf:
+            key: "/apps/guake/style/font/palette-name"
+            value: "'Vibrant Ink'"

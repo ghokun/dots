@@ -1,0 +1,6 @@
+[fedora]
+# 192.168.0.50 ansible_connection=paramiko
+192.168.0.113 ansible_connection=paramiko
+
+# [macos]
+# 192.168.0.0 ansible_connection=paramiko

@@ -1,0 +1,67 @@
+---
+user:
+  name: gokhun
+  locale: tr_TR.UTF-8
+dconf:
+  enabled: true
+dnf:
+  enabled: true
+  gpg:
+    - https://zoom.us/linux/download/pubkey
+    - https://packages.microsoft.com/keys/microsoft.asc
+    - https://downloads.1password.com/linux/keys/1password.asc
+  packages:
+    - name: 1password
+      repository: 1password
+    - name: code
+      repository: vscode
+    - name: dnf-plugins-core
+    - name: git
+    - name: glib2-devel
+    - name: gtk-murrine-engine
+    - name: gtk2-engines
+    - name: gnome-extensions-app
+    - name: gnome-tweaks
+    - name: gnupg2
+    - name: guake
+    - name: iperf3
+    - name: neofetch
+    - name: papirus-icon-theme
+    - name: python3-psutil
+    - name: rhythmbox
+    - name: teams
+      repository: ms-teams
+    - name: zsh
+    - name: https://zoom.us/client/latest/zoom_x86_64.rpm
+  repositories:
+    - baseurl: https://packages.microsoft.com/yumrepos/ms-teams
+      description: Microsoft Teams
+      gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+      name: ms-teams
+    - baseurl: https://packages.microsoft.com/yumrepos/vscode
+      description: Visual Studio Code
+      gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+      name: vscode
+    - baseurl: https://downloads.1password.com/linux/rpm/stable/$basearch
+      description: 1Password Stable Channel
+      gpgkey: https://downloads.1password.com/linux/keys/1password.asc
+      name: 1password
+docker:
+  enabled: true
+  old_docker_packages:
+    - docker
+    - docker-client
+    - docker-client-latest
+    - docker-common
+    - docker-latest
+    - docker-latest-logrotate
+    - docker-logrotate
+    # - docker-selinux
+    - docker-engine-selinux
+    - docker-engine
+  new_docker_packages:
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+nvidia:
+  enabled: true
