@@ -5,22 +5,34 @@
     state: absent
   loop: "{{ docker.old_docker_packages }}"
 
+- name: Check docker repo
+  command: dnf repolist docker-ce-stable
+  register: docker_repo_status
+  changed_when: not(docker_repo_status.stdout is search("enabled"))
+
 - name: Add docker repo
   command: dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+  when: not(docker_repo_status.stdout is search("enabled"))
 
 - name: Verify fingerprint
-  ansible.builtin.rpm_key:
+  rpm_key:
     key: "https://download.docker.com/linux/fedora/gpg"
     fingerprint: "060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35"
 
 - name: Install dnf packages
   dnf:
     name: "{{ item }}"
-    state: latest
+    state: present
   loop: "{{ docker.new_docker_packages }}"
+
+- name: Check if docker service is running
+  systemd:
+    name: docker.service
+  register: docker_status
 
 - name: Enable and start docker service
   command: systemctl enable docker.service --now
+  when: docker_status.status["SubState"] != "running"
 
 - name: Adding existing user "{{ user.name }}" to group docker
   user:
@@ -39,7 +51,7 @@
         force: yes
 
     - name: Import NVIDIA GPG keys
-      ansible.builtin.rpm_key:
+      rpm_key:
         state: present
         key: "https://nvidia.github.io/nvidia-docker/gpgkey"
 
@@ -48,6 +60,7 @@
         name: "nvidia-docker2"
         enablerepo: "nvidia-docker"
         state: latest
+      register: nvidia_docker2_status
 
     - name: Update nvidia-container-runtime config.toml
       lineinfile:
@@ -60,3 +73,4 @@
 
     - name: Restart docker service
       command: systemctl restart docker.service
+      when: nvidia_docker2_status.changed

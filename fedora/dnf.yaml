@@ -10,7 +10,7 @@
   loop: "{{ dnf.repositories }}"
 
 - name: Import GPG keys
-  ansible.builtin.rpm_key:
+  rpm_key:
     state: present
     key: "{{ item }}"
   loop: "{{ dnf.gpg }}"

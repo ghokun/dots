@@ -1,0 +1,24 @@
+# Functions
+alias copy="xclip -sel clip"
+alias ports="sudo lsof -i -P -n | grep LISTEN"
+
+# Developer shortcuts
+alias developer="cd ~/Developer"
+alias projects="cd ~/Developer/projects"
+alias github="cd ~/Developer/projects/github"
+alias experimental="cd ~/Developer/projects/experimental"
+
+# Documents
+alias books="cd ~/Documents/books"
+
+# Vagrant
+alias vagrant-kvm='
+  docker run -it --rm \
+    -e LIBVIRT_DEFAULT_URI \
+    -v /var/run/libvirt/:/var/run/libvirt/ \
+    -v ~/.vagrant.d:/.vagrant.d \
+    -v $(realpath "${PWD}"):${PWD} \
+    -w $(realpath "${PWD}") \
+    --network host \
+    vagrantlibvirt/vagrant-libvirt:latest \
+    vagrant'

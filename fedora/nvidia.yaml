@@ -8,18 +8,38 @@
     name: nvautoinstall
     state: latest
 
-- name: Enable RPM Fusion repo
+- name: Check RPM Fusion repo for NVIDIA Driver
+  command: dnf repolist rpmfusion-nonfree-nvidia-driver
+  register: rpm_fusion_repo_status
+  changed_when: not(rpm_fusion_repo_status.stdout is search("enabled"))
+
+- name: Enable RPM Fusion repo for NVIDIA Driver
   command: nvautoinstall --rpmadd
+  when: not(rpm_fusion_repo_status.stdout is search("enabled"))
+
+- name: Check NVIDIA Driver
+  command: dnf list akmod-nvidia
+  register: nvidia_driver_status
+  changed_when: not(nvidia_driver_status.stdout is search("akmod-nvidia"))
 
 - name: Install NVIDIA driver
   command: nvautoinstall --driver
+  when: not(nvidia_driver_status.stdout is search("akmod-nvidia"))
 
-- name: Installs only the x86 libraries for Xorg
-  command: nvautoinstall --x86lib
+- name: Check official NVIDIA repository for CUDA software
+  command: dnf repolist cuda-fedora*-x86_64
+  register: cuda_repo_status
+  changed_when: not(cuda_repo_status.stdout is search("enabled"))
 
 - name: Enable the official NVIDIA repository for CUDA software
   command: nvautoinstall --nvrepo
+  when: not(cuda_repo_status.stdout is search("enabled"))
+
+- name: Check CUDA Driver
+  command: dnf list cuda
+  register: cuda_status
+  changed_when: not(cuda_status.stdout is search("cuda"))
 
 - name: Install CUDA
   command: nvautoinstall --plcuda
-
+  when: not(cuda_status.stdout is search("cuda"))

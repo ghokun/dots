@@ -1,1 +1,56 @@
 ---
+- name: Change shell to zsh
+  user:
+    name: "{{ user.name }}"
+    shell: /usr/bin/zsh
+
+- name: Install ohmyzsh
+  import_role:
+    name: gantsign.oh-my-zsh
+  vars:
+    users:
+      - username: "{{ user.name }}"
+        oh_my_zsh:
+          theme: geoffgarside
+          plugins:
+            - git
+            - dnf
+            - docker
+            - docker-compose
+            - gh
+            - golang
+            - kubectl
+            - terraform
+
+- name: Copy dotfiles
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    mode: "0644"
+  loop:
+    - src: "fedora/shell/.aliases"
+      dest: "/home/{{ user.name }}/.aliases"
+    - src: "fedora/shell/.zshrc"
+      dest: "/home/{{ user.name }}/.zshrc"
+    - src: "fedora/shell/.profile"
+      dest: "/home/{{ user.name }}/.profile"
+
+- name: Create developer folders
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    mode: "0755"
+  loop:
+    - /home/{{ user.name }}/Developer
+    - /home/{{ user.name }}/Developer/bin
+    - /home/{{ user.name }}/Developer/containers
+    - /home/{{ user.name }}/Developer/iso
+    - /home/{{ user.name }}/Developer/projects
+    - /home/{{ user.name }}/Developer/software
+    - /home/{{ user.name }}/Developer/vms
+    - /home/{{ user.name }}/Developer/workspace
+    - /home/{{ user.name }}/Documents/books

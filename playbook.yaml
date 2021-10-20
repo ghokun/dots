@@ -21,6 +21,19 @@
       when: docker.enabled
       tags: ["docker"]
 
+    - import_tasks: fedora/linuxbrew.yaml
+      when: linuxbrew.enabled
+      tags: ["linuxbrew"]
+
+    - import_tasks: fedora/shell.yaml
+      when: shell.enabled
+      tags: ["shell"]
+
+    - import_tasks: fedora/sdkman.yaml
+      when: sdkman.enabled
+      tags: ["sdkman"]
+
     - name: Reboot
+      when: reboot.enabled
       reboot:
         pre_reboot_delay: 0

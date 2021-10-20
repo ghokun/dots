@@ -1,7 +1,3 @@
----
-user:
-  name: gokhun
-  locale: tr_TR.UTF-8
 dconf:
   enabled: true
 dnf:
@@ -48,6 +44,10 @@ dnf:
       name: 1password
 docker:
   enabled: true
+  new_docker_packages:
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
   old_docker_packages:
     - docker
     - docker-client
@@ -56,12 +56,20 @@ docker:
     - docker-latest
     - docker-latest-logrotate
     - docker-logrotate
-    # - docker-selinux
     - docker-engine-selinux
     - docker-engine
-  new_docker_packages:
-    - docker-ce
-    - docker-ce-cli
-    - containerd.io
+linuxbrew:
+  enabled: true
+  install_url: "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
+  install_checksum: "sha256:a00b8a87a66138861d1a56e180fa77c8a36d84a38f448d06d91c3255da0cc1a8"
 nvidia:
   enabled: true
+shell:
+  enabled: true
+sdkman:
+  enabled: true
+user:
+  locale: tr_TR.UTF-8
+  name: gokhun
+reboot:
+  enabled: false

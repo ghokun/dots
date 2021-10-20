@@ -1,2 +1,5 @@
+roles:
+  - role: gantsign.oh-my-zsh
+  - role: Comcast.sdkman
 collections:
   - name: community.general
