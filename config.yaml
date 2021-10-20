@@ -22,6 +22,7 @@ dnf:
     - name: guake
     - name: iperf3
     - name: neofetch
+    - name: nss-tools
     - name: papirus-icon-theme
     - name: python3-psutil
     - name: rhythmbox

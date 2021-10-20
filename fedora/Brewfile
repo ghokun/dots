@@ -1,6 +1,8 @@
 tap "hashicorp/tap"
 tap "homebrew/bundle"
 tap "homebrew/core"
+brew "ansible"
+brew "ansible-lint"
 brew "duf"
 brew "gcc"
 brew "gh"

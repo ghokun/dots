@@ -1,6 +1,6 @@
 # Dots
 
-## Installation
+## Installation
 - Enable SSH access on your system where you want to configure
 - Install ansible and git to your system where you will run this playbook
 - Clone the repository

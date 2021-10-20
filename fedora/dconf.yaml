@@ -242,9 +242,9 @@
         - key: "/apps/guake/style/font/allow-bold"
           value: "true"
         - key: "/apps/guake/style/font/palette"
-          value: "'#878787878787:#FFFF66660000:#CCCCFFFF0404:#FFFFCCCC0000:#4444B3B3CCCC:#99993333CCCC:#4444B3B3CCCC:#F5F5F5F5F5F5:#555555555555:#FFFF00000000:#0000FFFF0000:#FFFFFFFF0000:#00000000FFFF:#FFFF0000FFFF:#0000FFFFFFFF:#E5E5E5E5E5E5:#FFFFFFFFFFFF:#000000000000'"
+          value: "'#585860606969:#eaea4a495a5a:#3433d0d05857:#ffffeaea7f7f:#21208887ffff:#b3b39292f0f0:#3939c5c5cfcf:#d1d1d5d5dada:#95959d9da5a5:#f9f975758382:#8585e8e89d9d:#ffffeaea7f7f:#7979b8b7ffff:#b3b39292f0f0:#5656d4d4dddd:#fafafbfbfcfc:#f0f0f6f6fcfc:#010104040909'"
         - key: "/apps/guake/style/font/palette-name"
-          value: "'Vibrant Ink'"
+          value: "'Custom'"
 
     - name: Gnome Tweaks
       dconf:
@@ -274,3 +274,31 @@
           value: "'cobalt'"
         - key: "/org/gnome/gedit/preferences/ui/show-tabs-mode"
           value: "'auto'"
+
+    - name: Gnome terminal
+      dconf:
+        key: "{{ item.key }}"
+        value: "{{ item.value }}"
+      loop:
+        - key: "/org/gnome/terminal/legacy/profiles:default"
+          value: "'fac50a5b-9b10-49b0-8eae-361db9b1fdee'"
+        - key: "/org/gnome/terminal/legacy/profiles:list"
+          value: "['fac50a5b-9b10-49b0-8eae-361db9b1fdee']"
+        - key: "/org/gnome/terminal/legacy/profiles:/:fac50a5b-9b10-49b0-8eae-361db9b1fdee/background-color"
+          value: "'rgb(1,4,9)'"
+        - key: "/org/gnome/terminal/legacy/profiles:/:fac50a5b-9b10-49b0-8eae-361db9b1fdee/background-transparency-percent"
+          value: "36"
+        - key: "/org/gnome/terminal/legacy/profiles:/:fac50a5b-9b10-49b0-8eae-361db9b1fdee/bold-is-bright"
+          value: "true"
+        - key: "/org/gnome/terminal/legacy/profiles:/:fac50a5b-9b10-49b0-8eae-361db9b1fdee/cursor-shape"
+          value: "'underline'"
+        - key: "/org/gnome/terminal/legacy/profiles:/:fac50a5b-9b10-49b0-8eae-361db9b1fdee/foreground-color"
+          value: "'rgb(240,246,252)'"
+        - key: "/org/gnome/terminal/legacy/profiles:/:fac50a5b-9b10-49b0-8eae-361db9b1fdee/palette"
+          value: "['rgb(88,96,105)', 'rgb(234,74,90)', 'rgb(52,208,88)', 'rgb(255,234,127)', 'rgb(33,136,255)', 'rgb(179,146,240)', 'rgb(57,197,207)', 'rgb(209,213,218)', 'rgb(149,157,165)', 'rgb(249,117,131)', 'rgb(133,232,157)', 'rgb(255,234,127)', 'rgb(121,184,255)', 'rgb(179,146,240)', 'rgb(86,212,221)', 'rgb(250,251,252)']"
+        - key: "/org/gnome/terminal/legacy/profiles:/:fac50a5b-9b10-49b0-8eae-361db9b1fdee/use-theme-colors"
+          value: "false"
+        - key: "/org/gnome/terminal/legacy/profiles:/:fac50a5b-9b10-49b0-8eae-361db9b1fdee/use-transparent-background"
+          value: "true"
+        - key: "/org/gnome/terminal/legacy/profiles:/:fac50a5b-9b10-49b0-8eae-361db9b1fdee/visible-name"
+          value: "'{{ user.name }}'"
