@@ -28,6 +28,7 @@ dnf:
     - name: rhythmbox
     - name: teams
       repository: ms-teams
+    - name: vagrant
     - name: zsh
     - name: https://zoom.us/client/latest/zoom_x86_64.rpm
   repositories:

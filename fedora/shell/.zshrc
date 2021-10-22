@@ -13,7 +13,7 @@ export GPG_TTY=$(tty)
 export ZSH="$HOME/.oh-my-zsh"
 
 # Theme
-ZSH_THEME="geoffgarside"
+ZSH_THEME="gnzh"
 
 # Plugins
 plugins=(git dnf docker docker-compose gh golang kubectl terraform)
