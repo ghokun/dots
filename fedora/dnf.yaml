@@ -26,3 +26,9 @@
     enablerepo: "{{ item.repository | default('') }}"
     state: latest
   loop: "{{ dnf.packages }}"
+
+- name: Install multimedia playback packages
+  command: dnf -y groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
+
+- name: Group update sound and video
+  command: dnf -y groupupdate sound-and-video
