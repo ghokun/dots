@@ -9,7 +9,6 @@ homebrew:
     - name: ansible
     - name: ansible-lint
     - name: duf
-    - name: mas
     - name: speedtest
   casks:
     - name: 1password
@@ -21,7 +20,3 @@ homebrew:
     - name: rectangle
     - name: tailscale
     - name: visual-studio-code
-mas:
-  enabled: true
-  applications:
-    - 497799835 # XCode

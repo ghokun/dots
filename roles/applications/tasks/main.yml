@@ -1,10 +1,5 @@
 ---
-- name: Install Homebrew applications
+- name: Import Homebrew tasks
   ansible.builtin.import_tasks: homebrew.yml
   become: false
   when: homebrew.enabled
-
-- name: Install App Store applications
-  ansible.builtin.import_tasks: mas.yml
-  become: false
-  when: mas.enabled
