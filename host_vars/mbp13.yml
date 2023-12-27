@@ -21,3 +21,7 @@ homebrew:
     - name: rectangle
     - name: tailscale
     - name: visual-studio-code
+mas:
+  enabled: true
+  applications:
+    - 497799835 # XCode
