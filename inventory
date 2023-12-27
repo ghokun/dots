@@ -1,6 +1,0 @@
-[fedora]
-# 192.168.0.0 ansible_connection=paramiko
-localhost ansible_connection=local
-
-# [macos]
-# 192.168.0.0 ansible_connection=paramiko
