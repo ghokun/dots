@@ -1,5 +1,5 @@
 ---
-- name: Tap Homebrew repositories.
+- name: Tap Homebrew repositories
   community.general.homebrew_tap:
     name: "{{ item }}"
   loop: "{{ homebrew.taps }}"
@@ -8,14 +8,14 @@
   community.general.homebrew:
     update_homebrew: true
 
-- name: Install Homebrew formulae.
+- name: Install Homebrew formulae
   community.general.homebrew:
     name: "{{ item.name }}"
     state: "{{ item.state | default('present') }}"
     install_options: "{{ item.install_options | default(omit) }}"
   loop: "{{ homebrew.formulae }}"
 
-- name: Install Homebrew casks.
+- name: Install Homebrew casks
   community.general.homebrew_cask:
     name: "{{ item.name }}"
     state: "{{ item.state | default('present') }}"

@@ -9,6 +9,7 @@ homebrew:
     - name: ansible
     - name: ansible-lint
     - name: duf
+    - name: mas
     - name: speedtest
   casks:
     - name: 1password

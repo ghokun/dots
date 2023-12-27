@@ -1,0 +1,11 @@
+---
+- name: Ensure Ghostty configuration directory exists
+  file:
+    path: "/Users/{{ ansible_user }}/.config/ghostty"
+    state: directory
+
+- name: Copy Ghostty configuration
+  copy:
+    src: "files/ghostty.config"
+    dest: "/Users/{{ ansible_user }}/.config/ghostty/config"
+    mode: 0644
