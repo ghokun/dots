@@ -1,0 +1,22 @@
+---
+homebrew:
+  enabled: true
+  taps:
+    - graalvm/tap
+    - homebrew/cask-fonts
+    - teamookla/speedtest
+  formulae:
+    - name: ansible
+    - name: ansible-lint
+    - name: duf
+    - name: speedtest
+  casks:
+    - name: 1password
+    - name: font-monaspace
+    - name: google-chrome
+    - name: graalvm-community-jdk21
+    - name: iina
+    - name: jetbrains-toolbox
+    - name: rectangle
+    - name: tailscale
+    - name: visual-studio-code

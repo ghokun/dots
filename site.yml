@@ -1,6 +1,6 @@
+---
 - name: Install roles
   hosts: all
-  become: true
   roles:
     - applications
     - configs

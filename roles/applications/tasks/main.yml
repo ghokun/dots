@@ -1,0 +1,5 @@
+---
+- name: Install Homebrew applications
+  ansible.builtin.import_tasks: homebrew.yml
+  become: false
+  when: homebrew.enabled
