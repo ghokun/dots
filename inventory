@@ -1,0 +1,4 @@
+mbp13 ansible_host=localhost ansible_user=gokhun
+
+[all:vars]
+ansible_connection=paramiko
