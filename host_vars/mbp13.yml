@@ -11,6 +11,7 @@ homebrew:
     - name: duf
     - name: gnupg
     - name: iperf3
+    - name: node
     - name: speedtest
   casks:
     - name: 1password
@@ -19,8 +20,10 @@ homebrew:
     - name: graalvm-community-jdk21
     - name: iina
     - name: jetbrains-toolbox
-    - name: opencore-patcher
     - name: raspberry-pi-imager
     - name: rectangle
     - name: tailscale
     - name: visual-studio-code
+tizen:
+  enabled: true
+  version: 5.5

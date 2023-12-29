@@ -4,8 +4,3 @@
     path: "/Users/{{ ansible_user }}/.hushlogin"
     state: touch
     mode: "0644"
-
-- name: Copy zsh theme
-
-- name: Copy zsh configuration
-

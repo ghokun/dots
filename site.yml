@@ -1,6 +1,9 @@
 ---
 - name: Install roles
   hosts: all
+  vars_prompt:
+    - name: ansible_become_pass
+      prompt: Become password SUDO_ASKPASS
   roles:
     - applications
     - configs

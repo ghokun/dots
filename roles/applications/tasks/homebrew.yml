@@ -20,4 +20,5 @@
     name: "{{ item.name }}"
     state: "{{ item.state | default('present') }}"
     install_options: "{{ item.install_options | default(omit) }}"
+    sudo_password: "{{ ansible_become_pass }}"
   loop: "{{ homebrew.casks }}"
