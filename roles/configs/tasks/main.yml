@@ -2,3 +2,7 @@
 - name: Configure Ghostty
   ansible.builtin.import_tasks: ghostty.yml
   become: false
+
+- name: Configure zsh
+  ansible.builtin.import_tasks: ghostty.yml
+  become: false

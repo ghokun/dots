@@ -20,19 +20,25 @@ This is a repository that holds [dotfiles][1] for my old trusty Macbook Pro 11,1
   sudo systemsetup -setcomputername mbp13
   sudo systemsetup -setremotelogin on
   ```
+- Install XCode from App Store
 - Install Apple command line tools
   ```shell
   xcode-select --install
   ```
-- Install Homebrew
+- Install [Homebrew][4]
 - Install `ansible`
   ```shell
   brew install ansible
   ```
-- Copy or download `Ghostty.app` terminal to `/Applications`
+- Copy `Ghostty.app` terminal to `/Applications`
 - Copy `ssh` keys to `~/.ssh`
+- Copy `gpg` keys to `~/.gnupg`
 
 ## Installation
+
+```shell
+ansible-playbook -Kk site.yml
+```
 
 [1]: https://dotfiles.github.io
 
