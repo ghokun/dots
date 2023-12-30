@@ -16,29 +16,43 @@ This is a repository that holds [dotfiles][1] for my personal computers.
     - Select dark mode
 - Perform post installation steps for [OpenCore Legacy Patcher][3]
 - Change computer name and allow remote login
+
   ```shell
   sudo systemsetup -setcomputername mbp13
   sudo systemsetup -setremotelogin on
   ```
+
 - Install XCode from App Store
 - Install Apple command line tools
+
   ```shell
   xcode-select --install
   ```
+
 - Install [Homebrew][4]
 - Install `ansible`
+
   ```shell
   brew install ansible
   ```
+
 - Copy `Ghostty.app` terminal to `/Applications`
 - Copy `ssh` keys to `~/.ssh`
 - Copy `gpg` keys to `~/.gnupg`
 
 ## Installation
 
-- Run following:
+- Install requirements:
+
+  ```shell
+  ansible-galaxy install -r requirements.yml 
+  ```
+
+- Run playbook:
+
   ```shell
   ansible-playbook -Kk site.yml
+
   # or verbose, if required
   ansible-playbook -Kk site.yml -vvvv
   ```

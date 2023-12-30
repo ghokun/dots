@@ -8,4 +8,4 @@
     - role: applications
     - role: configs
     - role: geerlingguy.mac.dock
-      when: configure_dock
+      when: configure_dock and homebrew.enabled

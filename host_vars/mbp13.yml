@@ -47,6 +47,7 @@ tizen:
 
 # geerlingguy.mac.dock
 configure_dock: true
+dockutil_install: false
 dockitems_remove:
   - Launchpad
   - Messages
