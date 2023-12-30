@@ -1,0 +1,53 @@
+---
+- name: Configure autohide flag
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: autohide
+    type: bool
+    value: "{{ dock.autohide }}"
+
+- name: Configure dock magnification
+  block:
+    - name: Set dock magnification flag
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: magnification
+        type: bool
+        value: "{{ dock.magnify }}"
+
+    - name: Set dock magnification size
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: largesize
+        type: int
+        value: "{{ dock.magnify_size }}"
+
+- name: Configure application minification
+  block:
+    - name: Set minimize to application flag
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: minimize-to-application
+        type: bool
+        value: "{{ dock.minimize_to_application }}"
+
+    - name: Set minimize animation effect
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: mineffect
+        type: string
+        value: "{{ dock.mineffect }}"
+
+- name: Configure dock orientation
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: orientation
+    type: string
+    value: "{{ dock.orientation }}"
+
+- name: Configure dock size
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: size
+    type: int
+    value: "{{ dock.size }}"

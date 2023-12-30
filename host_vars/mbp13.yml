@@ -1,4 +1,13 @@
 ---
+dock:
+  autohide: true
+  magnify: true
+  magnify_size: 48
+  mineffect: genie
+  minimize_to_application: true
+  orientation: left
+  size: 32
+
 homebrew:
   enabled: true
   taps:
