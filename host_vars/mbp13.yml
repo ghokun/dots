@@ -8,10 +8,10 @@ dock:
   orientation: left
   size: 32
   hotcorners:
-    br: 1
-    tr: 1
-    bl: 1
-    tl: 2
+    br: 1 # -
+    tr: 1 # -
+    bl: 1 # -
+    tl: 2 # Mission control
 homebrew:
   enabled: true
   taps:

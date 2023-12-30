@@ -10,3 +10,5 @@
 - name: Configure dock
   ansible.builtin.import_tasks: dock.yml
   become: false
+  notify:
+    - Restart dock

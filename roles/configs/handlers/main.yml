@@ -1,0 +1,6 @@
+---
+- name: Restart dock # noqa no-changed-when
+  ansible.builtin.command:
+    argv:
+      - killall
+      - Dock
