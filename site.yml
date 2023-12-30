@@ -5,5 +5,7 @@
     - name: ansible_become_pass
       prompt: Password for SUDO_ASKPASS
   roles:
-    - applications
-    - configs
+    - role: applications
+    - role: configs
+    - role: geerlingguy.mac.dock
+      when: configure_dock

@@ -1,3 +1,4 @@
 ---
 collections:
-  - community.general
+  - name: community.general
+  - name: geerlingguy.mac

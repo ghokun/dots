@@ -45,6 +45,13 @@
     type: string
     value: "{{ dock.orientation }}"
 
+- name: Configure show recents flag
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: show-recents
+    type: bool
+    value: "{{ dock.show_recents }}"
+
 - name: Configure dock size
   community.general.osx_defaults:
     domain: com.apple.dock

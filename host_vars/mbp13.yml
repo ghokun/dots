@@ -1,22 +1,24 @@
 ---
 dock:
   autohide: true
-  magnify: true
-  magnify_size: 48
-  mineffect: genie
-  minimize_to_application: true
-  orientation: left
-  size: 32
   hotcorners:
     br: 1 # -
     tr: 1 # -
     bl: 1 # -
     tl: 2 # Mission control
+  magnify: true
+  magnify_size: 48
+  mineffect: genie
+  minimize_to_application: true
+  orientation: left
+  show_recents: false
+  size: 32
 homebrew:
   enabled: true
   taps:
     - graalvm/tap
     - homebrew/cask-fonts
+    - hpedrorodrigues/tools
     - teamookla/speedtest
   formulae:
     - name: ansible
@@ -29,6 +31,7 @@ homebrew:
     - name: speedtest
   casks:
     - name: 1password
+    - name: dockutil
     - name: font-monaspace
     - name: google-chrome
     - name: graalvm-community-jdk21
@@ -41,3 +44,24 @@ homebrew:
 tizen:
   enabled: true
   version: 5.5
+
+# geerlingguy.mac.dock
+configure_dock: true
+dockitems_remove:
+  - Launchpad
+  - Messages
+  - Mail
+  - Maps
+  - Photos
+  - FaceTime
+  - Contacts
+  - Reminders
+  - Notes
+  - Freeform
+  - TV
+  - "App Store"
+  - Downloads
+dockitems_persist:
+  - name: "Ghostty"
+    path: "/Applications/Ghostty.app/"
+    pos: 3
