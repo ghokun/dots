@@ -4,13 +4,14 @@
     path: "/Users/{{ ansible_user }}/.hushlogin"
     state: touch
     mode: "0644"
+    modification_time: preserve
+    access_time: preserve
 
 - name: Install oh-my-zsh
   ansible.builtin.git:
     repo: "https://github.com/ohmyzsh/ohmyzsh.git"
     dest: "/Users/{{ ansible_user }}/.oh-my-zsh"
     accept_newhostkey: true
-    depth: 1
     version: 667fdbf7746acc90aa29b316ef711180e7917aa2
 
 - name: Copy zsh theme

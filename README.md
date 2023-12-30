@@ -1,6 +1,6 @@
 # Dots
 
-This is a repository that holds [dotfiles][1] for my old trusty Macbook Pro 11,1.
+This is a repository that holds [dotfiles][1] for my personal computers.
 
 ## Manual Steps
 
@@ -36,9 +36,12 @@ This is a repository that holds [dotfiles][1] for my old trusty Macbook Pro 11,1
 
 ## Installation
 
-```shell
-ansible-playbook -Kk site.yml
-```
+- Run following:
+  ```shell
+  ansible-playbook -Kk site.yml
+  # or verbose, if required
+  ansible-playbook -Kk site.yml -vvvv
+  ```
 
 [1]: https://dotfiles.github.io
 

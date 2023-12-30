@@ -11,6 +11,7 @@ homebrew:
     - name: duf
     - name: gnupg
     - name: iperf3
+    - name: neofetch
     - name: node
     - name: speedtest
   casks:
