@@ -6,3 +6,7 @@
 - name: Configure zsh
   ansible.builtin.import_tasks: zsh.yml
   become: false
+
+- name: Configure dock
+  ansible.builtin.import_tasks: dock.yml
+  become: false

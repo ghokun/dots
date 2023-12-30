@@ -48,6 +48,24 @@
 - name: Configure dock size
   community.general.osx_defaults:
     domain: com.apple.dock
-    key: size
+    key: tilesize
     type: int
     value: "{{ dock.size }}"
+
+- name: Configure hot corners
+  block:
+    - name: Set corner action
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: "wvous-{{ item.key }}-corner"
+        type: int
+        value: "{{ item.value }}"
+      loop: "{{ dock.hotcorners | dict2items }}"
+
+    - name: Set corner modifier
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: "wvous-{{ item.key }}-modifier"
+        type: bool
+        value: "0"
+      loop: "{{ dock.hotcorners | dict2items }}"

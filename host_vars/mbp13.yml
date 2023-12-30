@@ -7,7 +7,11 @@ dock:
   minimize_to_application: true
   orientation: left
   size: 32
-
+  hotcorners:
+    br: 1
+    tr: 1
+    bl: 1
+    tl: 2
 homebrew:
   enabled: true
   taps:
